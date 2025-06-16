@@ -13,13 +13,19 @@ namespace MvcProject.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public IActionResult Index() // ../Views/Home/Index.cshtml dosyasý ile eþleþir bu fonksiyon tetiklendiðinde Index.cshtml dosyasý render edilir
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Privacy() // ../Views/Home/Privacy.cshtml dosyasý ile eþleþir
         {
+            return View();
+        }
+
+        public IActionResult Test()
+        {
+
             return View();
         }
 
