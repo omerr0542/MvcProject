@@ -1,0 +1,46 @@
+﻿INSERT INTO Categories (CategoryName, CategoryDescription, CategoryStatus)
+	SELECT 'Eğitim', 'Eğitim Kategorisi', 1
+	UNION
+	SELECT 'Tiyatro', 'Tiyatro Kategorisi', 1
+	UNION
+	SELECT 'Kitap', 'Kitap Kategorisi', 1
+	UNION
+	SELECT 'Spor', 'Film Kategorisi', 1
+	UNION
+	SELECT 'Film', 'Film Kategorisi', 1
+	UNION
+	SELECT 'Dizi', 'Dizi Kategorisi', 1
+
+
+INSERT INTO Writers(WriterName, WriterSurname, WriterMail, WriterPassword)
+	SELECT 'Ali', 'Yıldız', 'aliyildiz@gmail.com', '1'
+	UNION
+	SELECT 'Mehmet', 'Çınar', 'mehmetcinar@gmail.com', '11'
+	UNION
+	SELECT 'Emel', 'Öztürk', 'emelozturk@gmail.com', '123'
+	UNION
+	SELECT 'Gizem', 'Yıldız', 'gizemyildiz@gmail.com', '123'
+	UNION
+	SELECT 'Aslı', 'Kaya', 'aslikaya@gmail.com', '000111'
+
+INSERT INTO Headings(HeadingName, HeadingDate, CategoryID, WriterID)	
+	SELECT 'Breaking Bad', GETDATE(), 6, 3
+	UNION
+	SELECT 'Green Book', GETDATE(), 5, 1
+	UNION
+	SELECT 'İtiraflarım', GETDATE(), 3, 1
+	UNION
+	SELECT 'La Casa De Papel', GETDATE(), 6, 4
+	UNION
+	SELECT 'Venedik Taciri', GETDATE(), 2, 5
+	
+INSERT INTO Contents(ContentValue, ContentDate, HeadingID, WriterID)
+	SELECT 'Walter White''ın Efsanevi Yaşamı', GETDATE(), 1, 3
+	UNION
+	SELECT 'Küçük Walter Seni Çok Özledik', GETDATE(), 1, 4
+	UNION
+	SELECT 'Bu film 2019 yılında oscar ödülüne aday oldu ve kazandı', GETDATE(), 2, 1
+	UNION
+	SELECT 'Çok beğendiğim efsane bir film', GETDATE(), 2, 3
+	UNION
+	SELECT 'En iyilerden', GETDATE(), 2, 5
