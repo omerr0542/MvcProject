@@ -1,11 +1,12 @@
-﻿using System;
+﻿using EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using EntityLayer.Concrete;
 
 namespace DataAccessLayer.Concrete
 {
@@ -17,5 +18,16 @@ namespace DataAccessLayer.Concrete
         public DbSet<Content> Contents { get; set; }
         public DbSet<Heading> Headings { get; set; }
         public DbSet<Writer> Writers { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            var config = new ConfigurationBuilder()
+                                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                                .AddJsonFile("appsettings.json")
+                                .Build();
+
+            var connectionString = config.GetConnectionString("DefaultConnection");
+            optionsBuilder.UseSqlServer(connectionString);
+        }
     }
 }
