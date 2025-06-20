@@ -19,15 +19,21 @@ namespace DataAccessLayer.Concrete
         public DbSet<Heading> Headings { get; set; }
         public DbSet<Writer> Writers { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            var config = new ConfigurationBuilder()
-                                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                                .AddJsonFile("appsettings.json")
-                                .Build();
+        public Context(DbContextOptions<Context> options) : base(options) { }
 
-            var connectionString = config.GetConnectionString("DefaultConnection");
-            optionsBuilder.UseSqlServer(connectionString);
+        public Context()
+        {
         }
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    var config = new ConfigurationBuilder()
+        //                        .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+        //                        .AddJsonFile("appsettings.json")
+        //                        .Build();
+
+        //    var connectionString = config.GetConnectionString("DefaultConnection");
+        //    optionsBuilder.UseSqlServer(connectionString);
+        //}
     }
 }

@@ -1,6 +1,5 @@
 using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
-using System.Data.SqlClient;
 
 
 var builder = WebApplication.CreateBuilder(args);

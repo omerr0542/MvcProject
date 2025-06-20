@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+Bootstrap linli
+
+<link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+
+<div>Merhaba</div>
+<br />
+
+<h3>Mvc Kamp Tablo Örneğ</h3>
+<br />
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Adı</th>
+			<th>Açıklama</th>
+			<th>Durum</th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.CategoryID</td>
+				<td>@item.CategoryName</td>
+				<td>@item.CategoryDescription</td>
+				<td>@item.CategoryStatus</td>
+			</tr>
+		}
+	</tbody>
+</table>
