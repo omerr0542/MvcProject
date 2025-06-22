@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IRepository<T> // T bir entity sınıfı olacak T içinde gönderilen sınıfa göre işlemler tanımlanmış olacak
+    public interface IRepository<T> where T : class // T bir entity sınıfı olacak T içinde gönderilen sınıfa göre işlemler tanımlanmış olacak
     {
         List<T> List();
         void Insert(T p);

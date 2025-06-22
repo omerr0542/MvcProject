@@ -11,18 +11,19 @@ namespace DataAccessLayer.Concrete.Repositories
     // T değeri class olmak zorunda ve referans tip olmalı
     public class GenericRepository<T> : IRepository<T> where T: class
     {
-        Context c = new Context();
+        Context c;
         DbSet<T> _object;
 
-        public GenericRepository()
+        public GenericRepository(Context context)
         {
+            c = context; // Context sınıfından gelen DbSet<T> tipindeki nesneyi c değişkenine atıyoruz.
             _object = c.Set<T>(); // Context sınıfından gelen DbSet<T> tipindeki nesneyi _object değişkenine atıyoruz.
                                   // Bu sayede dışarıdan gelen entity sınıflarını GenericRepository içinde kullanabiliyoruz.
         }
 
         public void Delete(T p)
         {
-            _object.Remove(p);
+            _object.Remove(p); 
             c.SaveChanges();
         }
 

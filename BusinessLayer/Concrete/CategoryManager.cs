@@ -10,7 +10,13 @@ namespace BusinessLayer.Concrete
 {
     public class CategoryManager
     {
-        GenericRepository<Category> _genericRepository = new GenericRepository<Category>();
+
+        GenericRepository<Category> _genericRepository;
+
+        public CategoryManager(GenericRepository<Category> genericRepository)
+        {
+            _genericRepository = genericRepository;
+        }
 
         public List<Category> GetAllBL()
         {

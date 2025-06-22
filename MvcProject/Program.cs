@@ -1,16 +1,20 @@
+using BusinessLayer.Concrete;
 using DataAccessLayer.Concrete;
+using DataAccessLayer.Concrete.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<Context>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped(typeof(GenericRepository<>));
+builder.Services.AddScoped<CategoryManager>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
-
-builder.Services.AddDbContext<Context>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
