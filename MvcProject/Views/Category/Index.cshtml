@@ -1,13 +1,10 @@
-﻿@model List<EntityLayer.Concrete.Category>
+﻿@using EntityLayer.Concrete;
+@model List<Category>
 @{
     Layout = null;
 }
 
-<link href="~/wwwroot/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-
-<div>Merhaba</div>
-<br />
-
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
 <h3>Mvc Kamp Tablo Örneğ</h3>
 <br />
 
@@ -18,6 +15,7 @@
 			<th>Adı</th>
 			<th>Açıklama</th>
 			<th>Durum</th>
+			<th>Güncelle</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -28,7 +26,14 @@
 				<td>@item.CategoryName</td>
 				<td>@item.CategoryDescription</td>
 				<td>@item.CategoryStatus</td>
+				<td><button class="btn btn-success">Güncelle</button> </td>
 			</tr>
 		}
 	</tbody>
 </table>
+
+<a href="/Category/AddCategory" class="btn btn-info">Yeni Kategori</a>
+
+@* <button class="btn btn-info">Kategori Ekle</button>
+<button class="btn btn-warning">Kategori Listesi</button>
+<button class="btn btn-danger">Kategori Açıklamaları</button> *@

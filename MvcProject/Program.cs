@@ -1,6 +1,8 @@
 using BusinessLayer.Concrete;
+using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.Concrete.Repositories;
+using DataAccessLayer.EntityFramework;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -11,6 +13,7 @@ builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped(typeof(GenericRepository<>));
+builder.Services.AddScoped<ICategoryDal, EFCategoryDal>();
 builder.Services.AddScoped<CategoryManager>();
 builder.Services.AddControllersWithViews();
 
