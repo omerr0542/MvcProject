@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +34,11 @@ namespace DataAccessLayer.Concrete.Repositories
             c.SaveChanges();
         }
 
+        public T Get(Expression<Func<T, bool>> filter)
+        {
+            return _object.SingleOrDefault(filter); // Filtreye uyan tek bir nesne döndürür, eğer yoksa null döner
+        }
+
         public List<T> List()
         {
             return _object.ToList();
@@ -52,6 +58,7 @@ namespace DataAccessLayer.Concrete.Repositories
 
         public void Update(T p)
         {
+            _object.Update(p);
             c.SaveChanges(); // Değişiklikleri kaydet
         }
     }

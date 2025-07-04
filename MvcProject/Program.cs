@@ -4,6 +4,7 @@ using DataAccessLayer.Concrete;
 using DataAccessLayer.Concrete.Repositories;
 using DataAccessLayer.EntityFramework;
 using Microsoft.EntityFrameworkCore;
+using MvcProject.Controllers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<Context>(options =>
 builder.Services.AddScoped(typeof(GenericRepository<>));
 builder.Services.AddScoped<ICategoryDal, EFCategoryDal>();
 builder.Services.AddScoped<CategoryManager>();
+builder.Services.AddScoped<AdminCategoryController>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

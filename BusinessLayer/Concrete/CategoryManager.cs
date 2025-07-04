@@ -35,7 +35,22 @@ namespace BusinessLayer.Concrete
         public void CategoryAddBL(Category category)
         {
             _categoryDal.Insert(category); // GenericRepository yerine ICategoryDal kullanıyoruz    
-        }  
+        }
+
+        public Category GetByID(int ID)
+        {
+            return _categoryDal.Get(x => x.CategoryID == ID); // GenericRepository yerine ICategoryDal kullanıyoruz
+        }
+
+        public void DeleteCategory(Category category)
+        {
+            _categoryDal.Delete(category);
+        }
+
+        public void UpdateCategoty(Category category)
+        {
+            _categoryDal.Update(category);
+        }
 
         //public List<Category> GetAllBL()
         //{
