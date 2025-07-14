@@ -1,0 +1,32 @@
+﻿@using EntityLayer.Concrete;
+@model Heading
+
+@{
+    ViewData["Title"] = "AddHeading";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Heading Ekle</h1>
+<br />
+
+@using (Html.BeginForm("AddHeading", "Heading", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Heading Başlığı: ")
+        @Html.TextBoxFor(model => model.HeadingName, new { @class = "form-control", placeholder = "Heading Başlığı" })
+        @Html.ValidationMessageFor(model => model.HeadingName)
+        <br />
+
+        @Html.Label("Kategori: ")
+        @Html.DropDownListFor(model => model.CategoryID, ViewBag.CategoryList as List<SelectListItem>, "-- Kategori Seçin --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.CategoryID)
+        <br />
+
+        @Html.Label("Yazar: ")
+        @Html.DropDownListFor(model => model.WriterID, ViewBag.WriterList as List<SelectListItem>, "-- Yazar Seçin --", new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.WriterID)
+        <br />
+
+        <button class="btn btn-info">Kaydet</button>
+    </div>
+}

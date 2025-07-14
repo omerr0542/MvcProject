@@ -24,13 +24,18 @@ namespace DataAccessLayer.Concrete.Repositories
 
         public void Delete(T p)
         {
-            _object.Remove(p); 
+            var deletedEntity = c.Entry(p);
+            deletedEntity.State = EntityState.Deleted;
+            //_object.Remove(p); 
             c.SaveChanges();
         }
 
         public void Insert(T p)
         {
-            _object.Add(p);
+            // Bu şekilde eklenen obje otomatik olacak save changes fonksiyonu ile otomatik olarak eklenmiş olacak. Bu şekilde add işlemine ihtiyac duymayacağız.
+            var addedEntity = c.Entry(p);
+            addedEntity.State = EntityState.Added;
+            // _object.Add(p);
             c.SaveChanges();
         }
 
@@ -58,8 +63,22 @@ namespace DataAccessLayer.Concrete.Repositories
 
         public void Update(T p)
         {
-            _object.Update(p);
+            var modifiedEntity = c.Entry(p);
+            modifiedEntity.State = EntityState.Modified;
+            //_object.Update(p);
             c.SaveChanges(); // Değişiklikleri kaydet
+        }
+
+        public List<T> ListWithIncludes(params Expression<Func<T, object>>[] includes)
+        {
+            IQueryable<T> query = _object;
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            return query.ToList();
         }
     }
 }

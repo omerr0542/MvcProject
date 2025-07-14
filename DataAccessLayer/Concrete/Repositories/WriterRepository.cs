@@ -36,6 +36,11 @@ namespace DataAccessLayer.Concrete.Repositories
             throw new NotImplementedException();
         }
 
+        public List<Writer> ListWithIncludes(params Expression<Func<Writer, object>>[] includes)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Writer p)
         {
             throw new NotImplementedException();

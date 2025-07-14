@@ -1,0 +1,53 @@
+﻿@model EntityLayer.Concrete.Writer;
+@{
+    ViewData["Title"] = "AddWriter";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Yeni Yazar Ekleme</h1>
+
+<br />
+
+@using(Html.BeginForm("AddWriter", "WriterController", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.Label("Yazar Adı")
+        @Html.TextBoxFor(model => model.WriterName, new { @class = "form-control", placeholder = "Yazar Adı" })
+        @Html.ValidationMessageFor(model => model.WriterName, "", new { @class = "text-danger" })
+        <br />
+
+        @Html.Label("Yazar Soyadı")
+        @Html.TextBoxFor(model => model.WriterSurname, new { @class = "form-control", placeholder = "Yazar Soyadı" })
+        @Html.ValidationMessageFor(model => model.WriterSurname, "", new { @class = "text-danger" })
+        <br />
+
+        @Html.Label("Yazar Title")
+        @Html.TextBoxFor(model => model.WriterTitle, new { @class = "form-control", placeholder = "Yazar Title" })
+        @Html.ValidationMessageFor(model => model.WriterTitle, "", new { @class = "text-danger" })
+        <br />
+
+        @Html.Label("Yazar Mail")
+        @Html.TextBoxFor(model => model.WriterMail, new { @class = "form-control", placeholder = "Yazar Mail" })
+        @Html.ValidationMessageFor(model => model.WriterMail, "", new { @class = "text-danger" })
+        <br />
+
+        @Html.Label("Yazar Şifresi")
+        @Html.TextBoxFor(model => model.WriterPassword, new { @class = "form-control", placeholder = "Yazar Şifresi" })
+        @Html.ValidationMessageFor(model => model.WriterPassword, "", new { @class = "text-danger" })
+        <br />
+
+        @Html.Label("Yazar Görsel Linki")
+        @Html.TextBoxFor(model => model.WriterImage, new { @class = "form-control", placeholder = "Yazar Görsel Linki" })
+        @Html.ValidationMessageFor(model => model.WriterImage, "", new { @class = "text-danger" })
+        <br />
+
+        @Html.Label("Yazar Hakkında")
+        @Html.TextBoxFor(model => model.WriterAbout, new { @class = "form-control", placeholder = "Yazar Hakkında" })
+        @Html.ValidationMessageFor(model => model.WriterAbout, "", new { @class = "text-danger" })
+        <br />
+
+        <button class="btn btn-info">Kaydet</button>
+    </div>
+}
+
+

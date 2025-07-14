@@ -1,3 +1,4 @@
+using BusinessLayer.Abstract;
 using BusinessLayer.Concrete;
 using DataAccessLayer.Abstract;
 using DataAccessLayer.Concrete;
@@ -13,10 +14,21 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Context>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddScoped(typeof(GenericRepository<>));
 builder.Services.AddScoped<ICategoryDal, EFCategoryDal>();
-builder.Services.AddScoped<CategoryManager>();
-builder.Services.AddScoped<AdminCategoryController>();
+builder.Services.AddScoped<IWriterDal, EFWriterDal>();
+builder.Services.AddScoped<IHeadingDal, EFHeadingDal>();
+
+builder.Services.AddScoped<IWriterService, WriterManager>();
+builder.Services.AddScoped<ICategoryService, CategoryManager>();
+builder.Services.AddScoped<IHeadingService, HeadingManager>();
+
+//builder.Services.AddScoped<CategoryManager>();
+//builder.Services.AddScoped<WriterManager>();
+//builder.Services.AddScoped<HeadingManager>();
+
+//builder.Services.AddScoped<Context>(); 
+
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
