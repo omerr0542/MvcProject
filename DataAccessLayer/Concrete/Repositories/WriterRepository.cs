@@ -16,6 +16,11 @@ namespace DataAccessLayer.Concrete.Repositories
             throw new NotImplementedException();
         }
 
+        public List<Writer> FilterWithIncludes(Expression<Func<Writer, bool>> filter, params Expression<Func<Writer, object>>[] includes)
+        {
+            throw new NotImplementedException();
+        }
+
         public Writer Get(Expression<Func<Writer, bool>> filter)
         {
             throw new NotImplementedException();

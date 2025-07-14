@@ -80,5 +80,24 @@ namespace DataAccessLayer.Concrete.Repositories
 
             return query.ToList();
         }
+
+
+        // Bu metot, filtreleme işlemi ile birlikte includes parametresini de alır.
+        public List<T> FilterWithIncludes(Expression<Func<T, bool>> filter, params Expression<Func<T, object>>[] includes)
+        {
+             IQueryable<T> query = _object;
+
+            foreach (var include in includes)
+            {
+                query = query.Include(include);
+            }
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            return query.ToList();
+        }
     }
 }

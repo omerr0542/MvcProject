@@ -86,5 +86,71 @@ namespace MvcProject.Controllers
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public IActionResult EditHeading(int id)
+        {
+            var heading = _headingManager.GetByIdWithIncludes(id);
+            if (heading == null)
+            {
+                return NotFound();
+            }
+
+            var categoryList = _categoryService.GetList()
+                .Select(x => new SelectListItem
+                {
+                    Text = x.CategoryName,
+                    Value = x.CategoryID.ToString()
+                }).ToList();
+
+            var writerList = _writerService.GetList()
+                .Select(x => new SelectListItem
+                {
+                    Text = x.WriterName,
+                    Value = x.WriterID.ToString()
+                }).ToList();
+
+            ViewBag.CategoryList = categoryList;
+            ViewBag.WriterList = writerList;
+            return View(heading);
+        }
+
+        [HttpPost]
+        public IActionResult EditHeading(Heading p)
+        {
+            var result = headingValidator.Validate(p);
+
+            if (!result.IsValid)
+            {
+                ViewBag.CategoryList = _categoryService.GetList()
+                    .Select(x => new SelectListItem
+                    {
+                        Text = x.CategoryName,
+                        Value = x.CategoryID.ToString()
+                    }).ToList();
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+
+                return View(p);
+            }
+
+            _headingManager.HeadingUpdate(p);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult DeleteHeading(int id)
+        {
+            var heading = _headingManager.GetById(id);
+            if (heading == null)
+            {
+                return NotFound();
+            }
+            heading.HeadingStatus = false; // Başlığı silmek yerine durumunu false yapıyoruz
+            _headingManager.HeadingUpdate(heading);
+            return RedirectToAction("Index");
+
+        }
     }
 }

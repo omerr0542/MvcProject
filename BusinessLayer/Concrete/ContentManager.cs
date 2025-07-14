@@ -39,9 +39,9 @@ namespace BusinessLayer.Concrete
             return _contentDal.List(); 
         }
 
-        public List<Content> GetListByID(int id)
+        public List<Content> GetListByHeadingID(int id)
         {
-            return _contentDal.List(x => x.HeadingID == id);
+            return _contentDal.FilterWithIncludes(x => x.HeadingID == id, x => x.Writer);
         }
 
         public void UpdateContent(Content content)

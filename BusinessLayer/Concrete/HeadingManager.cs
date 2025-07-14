@@ -47,5 +47,10 @@ namespace BusinessLayer.Concrete
         {
             return _headingDal.ListWithIncludes(x => x.Category, x => x.Writer);
         }
+
+        public Heading GetByIdWithIncludes(int id)
+        {
+            return _headingDal.FilterWithIncludes(x => x.HeadingID == id, x => x.Category, x => x.Writer)[0];
+        }
     }
 }

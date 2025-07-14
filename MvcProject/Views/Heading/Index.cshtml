@@ -40,8 +40,11 @@
                             <th style="width: 20%">
                                 Başlık Adı
                             </th>
-                            <th style="width: 30%">
+                            <th style="width: 22%">
                                 Yazar
+                            </th>
+                            <th style="width: 8%">
+                                Durum
                             </th>
                             <th style="width: 8%" class="text-center">
                                 Kategori
@@ -94,6 +97,21 @@
                                         </li>
                                     </ul>
                                 </td>
+
+                                @* Burada true olanları yine yeşil badge içinde aktif , false olanları kırmızı badge içinde pasif yazan kodu switch case ile yaz *@
+
+                                <td class="project-state">
+                                    @switch (item.HeadingStatus)
+                                    {
+                                        case true:
+                                            color = "badge badge-success";
+                                            <span class="@color">Aktif</span>;
+                                            break;
+                                        case false:
+                                            color = "badge badge-danger";
+                                            <span class="@color">Pasif</span>;
+                                            break;
+                                    }
                                 <td class="project-state">
                                     <span class="@color">@item.Category.CategoryName</span>
                                 </td>
@@ -103,12 +121,12 @@
                                         </i>
                                         Yazılar
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="#">
+                                    <a class="btn btn-info btn-sm" href="/Heading/EditHeading/@item.HeadingID">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Düzenle
                                     </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
+                                    <a class="btn btn-danger btn-sm" href="/Heading/DeleteHeading/@item.HeadingID">
                                         <i class="fas fa-trash">
                                         </i>
                                         Sil

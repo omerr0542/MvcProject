@@ -17,5 +17,6 @@ namespace DataAccessLayer.Abstract
         List<T> List(Expression<Func<T, bool>> filter); // filtreleme işlemi için kullanılır
 
         List<T> ListWithIncludes(params Expression<Func<T, object>>[] includes);
+        List<T> FilterWithIncludes(Expression<Func<T, bool>> filter, params Expression<Func<T, object>>[] includes);
     }
 }

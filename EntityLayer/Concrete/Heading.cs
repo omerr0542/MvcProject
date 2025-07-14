@@ -18,6 +18,8 @@ namespace EntityLayer.Concrete
 
         public DateTime HeadingDate { get; set; }
 
+        public bool HeadingStatus { get; set; }
+
         public int CategoryID { get; set; }
         public Category Category{ get; set; }
 
