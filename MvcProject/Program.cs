@@ -20,6 +20,7 @@ builder.Services.AddScoped<IHeadingDal, EFHeadingDal>();
 builder.Services.AddScoped<IContentDal, EFContentDal>();
 builder.Services.AddScoped<IAboutDal, EFAboutDal>();
 builder.Services.AddScoped<IContactDal, EFContactDal>();
+builder.Services.AddScoped<IMessageDal, EFMessageDal>();
 
 builder.Services.AddScoped<IWriterService, WriterManager>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
@@ -27,6 +28,7 @@ builder.Services.AddScoped<IHeadingService, HeadingManager>();
 builder.Services.AddScoped<IContentService, ContentManager>();
 builder.Services.AddScoped<IAboutService, AboutManager>();
 builder.Services.AddScoped<IContactService, ContactManager>();
+builder.Services.AddScoped<IMessageService, MessageManager>();
 
 //builder.Services.AddScoped<CategoryManager>();
 //builder.Services.AddScoped<WriterManager>();
@@ -46,6 +48,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+app.UseStatusCodePagesWithReExecute("/ErrorPage/Page{0}");
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

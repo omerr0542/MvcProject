@@ -25,5 +25,10 @@ namespace MvcProject.Controllers
             var contactValue = _contactService.GetById(id);
             return View(contactValue);
         }
+
+        public PartialViewResult MessageListMenu()
+        {
+            return PartialView();
+        }
     }
 }

@@ -1,9 +1,10 @@
 ﻿@using EntityLayer.Concrete
-@model List<Contact>
+@model List<Message>
 @{
-    ViewBag.Title = "Index";
+    ViewData["Title"] = "Inbox";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+
 
 <!DOCTYPE html>
 <html>
@@ -16,7 +17,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Mesaj Sayfası</h1>
+                    <h1>Kişisel Mesaj Sayfası</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -24,7 +25,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="row">
-            @Html.Partial("MessageListMenu")
+            @Html.Partial("~/Views/Contact/MessageListMenu.cshtml")
             <div class="col-md-9">
                 <div class="card card-primary card-outline">
                     <div class="card-header">
@@ -78,12 +79,12 @@
                                                 </div>
                                             </td>
                                             <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
-                                            <td class="mailbox-name"><a href="/Contact/GetContactDetails/@item.ContactID">@item.UserName</a></td>
+                                            <td class="mailbox-name"><a href="/Message/GetInboxMessageDetails/@item.MessageID">@item.SenderMail</a></td>
                                             <td class="mailbox-subject">
-                                                <b>@item.Subject</b> @item.Message
+                                                <b>@item.Subject</b> @item.MessageContent
                                             </td>
                                             <td class="mailbox-attachment"></td>
-                                            <td class="mailbox-date">5 mins ago</td>
+                                            <td class="mailbox-date">@(((int)(DateTime.Now.Date - item.MessageDate).TotalMinutes).ToString()) mins ago</td>
                                         </tr>
                                     }
                                 </tbody>
@@ -127,3 +128,4 @@
 
 </body>
 </html>
+
