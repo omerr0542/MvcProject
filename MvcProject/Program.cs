@@ -19,12 +19,14 @@ builder.Services.AddScoped<IWriterDal, EFWriterDal>();
 builder.Services.AddScoped<IHeadingDal, EFHeadingDal>();
 builder.Services.AddScoped<IContentDal, EFContentDal>();
 builder.Services.AddScoped<IAboutDal, EFAboutDal>();
+builder.Services.AddScoped<IContactDal, EFContactDal>();
 
 builder.Services.AddScoped<IWriterService, WriterManager>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
 builder.Services.AddScoped<IHeadingService, HeadingManager>();
 builder.Services.AddScoped<IContentService, ContentManager>();
 builder.Services.AddScoped<IAboutService, AboutManager>();
+builder.Services.AddScoped<IContactService, ContactManager>();
 
 //builder.Services.AddScoped<CategoryManager>();
 //builder.Services.AddScoped<WriterManager>();
