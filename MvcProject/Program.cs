@@ -22,6 +22,7 @@ builder.Services.AddScoped<IAboutDal, EFAboutDal>();
 builder.Services.AddScoped<IContactDal, EFContactDal>();
 builder.Services.AddScoped<IMessageDal, EFMessageDal>();
 builder.Services.AddScoped<IImageFileDal, EFImageFileDal>();
+builder.Services.AddScoped<IAdminDal, EFAdminDal>();
 
 builder.Services.AddScoped<IWriterService, WriterManager>();
 builder.Services.AddScoped<ICategoryService, CategoryManager>();
@@ -31,6 +32,13 @@ builder.Services.AddScoped<IAboutService, AboutManager>();
 builder.Services.AddScoped<IContactService, ContactManager>();
 builder.Services.AddScoped<IMessageService, MessageManager>();
 builder.Services.AddScoped<IImageFileService, ImageFileManager>();
+builder.Services.AddScoped<IAdminService, AdminManager>();
+
+builder.Services.AddAuthentication("AdminCookie")
+    .AddCookie("AdminCookie", options =>
+    {
+        options.LoginPath = "/Login/Index";
+    });
 
 //builder.Services.AddScoped<CategoryManager>();
 //builder.Services.AddScoped<WriterManager>();
@@ -57,6 +65,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

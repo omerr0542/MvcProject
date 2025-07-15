@@ -1,24 +1,27 @@
-﻿using BusinessLayer.Concrete;
+﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MvcProject.Controllers
 {
+    [Authorize]
     public class AdminCategoryController : Controller
     {
-        private readonly CategoryManager _categoryManager;
+        private readonly ICategoryService _categoryService;
 
-        public AdminCategoryController(CategoryManager categoryManager)
+        public AdminCategoryController(ICategoryService categoryService)
         {
-            _categoryManager = categoryManager;
+            _categoryService = categoryService;
         }
 
         public IActionResult Index()
         {
-            var categories = _categoryManager.GetList();
+            var categories = _categoryService.GetList();
             return View(categories);
         }
 
@@ -35,7 +38,7 @@ namespace MvcProject.Controllers
             ValidationResult result = categoryValidator.Validate(p);
             if(result.IsValid)
             {
-                _categoryManager.CategoryAddBL(p);
+                _categoryService.CategoryAddBL(p);
                 return RedirectToAction("Index");
             }
             else
@@ -50,10 +53,10 @@ namespace MvcProject.Controllers
 
         public ActionResult DeleteCategory(int ID)
         {
-            var category = _categoryManager.GetByID(ID);
+            var category = _categoryService.GetByID(ID);
             if (category != null)
             {
-                _categoryManager.DeleteCategory(category);
+                _categoryService.DeleteCategory(category);
             }
             return RedirectToAction("Index");
         }
@@ -61,7 +64,7 @@ namespace MvcProject.Controllers
         [HttpGet]
         public ActionResult UpdateCategory(int ID)
         {
-            var category = _categoryManager.GetByID(ID);
+            var category = _categoryService.GetByID(ID);
             if (category != null)
             {
                 return View(category);
@@ -76,7 +79,7 @@ namespace MvcProject.Controllers
             ValidationResult result = categoryValidator.Validate(category);
             if (result.IsValid)
             {
-                _categoryManager.UpdateCategoty(category);
+                _categoryService.UpdateCategoty(category);
                 return RedirectToAction("Index");
             }
             else

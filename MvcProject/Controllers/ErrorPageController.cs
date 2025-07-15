@@ -15,6 +15,5 @@ namespace MvcProject.Controllers
             Response.StatusCode = 404; // Forbidden
             return View();
         }
-
     }
 }
