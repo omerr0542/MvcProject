@@ -52,5 +52,10 @@ namespace BusinessLayer.Concrete
         {
             return _headingDal.FilterWithIncludes(x => x.HeadingID == id, x => x.Category, x => x.Writer)[0];
         }
+
+        public List<Heading> GetListByWriter(int id)
+        {
+            return _headingDal.List(x => x.WriterID == id);
+        }
     }
 }

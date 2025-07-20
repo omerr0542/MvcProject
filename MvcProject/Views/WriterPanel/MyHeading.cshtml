@@ -1,8 +1,8 @@
 ﻿@using EntityLayer.Concrete
 @model List<Heading>
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "MyHeading";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
 }
 
 @{
@@ -55,7 +55,7 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            if(item.Category.CategoryName == "Tiyatro")
+                            if (item.Category.CategoryName == "Tiyatro")
                             {
                                 color = "badge badge-warning";
                             }
@@ -104,11 +104,13 @@
                                     {
                                         case true:
                                             color = "badge badge-success";
-                                            <span class="@color">Aktif</span>;
+                                            <span class="@color">Aktif</span>
+                                            ;
                                             break;
                                         case false:
                                             color = "badge badge-danger";
-                                            <span class="@color">Pasif</span>;
+                                            <span class="@color">Pasif</span>
+                                            ;
                                             break;
                                     }
                                 <td class="project-state">
