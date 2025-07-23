@@ -44,6 +44,11 @@ namespace BusinessLayer.Concrete
             return _contentDal.FilterWithIncludes(x => x.HeadingID == id, x => x.Writer);
         }
 
+        public List<Content> GetListByWriterID(int id)
+        {
+            return _contentDal.FilterWithIncludes(x => x.WriterID == id, x => x.Heading, x=>x.Writer);
+        }
+
         public void UpdateContent(Content content)
         {
             _contentDal.Update(content);

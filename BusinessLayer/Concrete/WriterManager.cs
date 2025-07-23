@@ -42,5 +42,13 @@ namespace BusinessLayer.Concrete
         {
             _writerDal.Update(writer);
         }
+
+        public bool Authorization(Writer writer)
+        {
+            if(writer == null)
+                return false;
+
+            return _writerDal.List(x => x.WriterMail == writer.WriterMail && x.WriterPassword == writer.WriterPassword).Any();
+        }
     }
 }

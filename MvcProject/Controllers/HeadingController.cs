@@ -150,7 +150,6 @@ namespace MvcProject.Controllers
             heading.HeadingStatus = false; // Başlığı silmek yerine durumunu false yapıyoruz
             _headingManager.HeadingUpdate(heading);
             return RedirectToAction("Index");
-
         }
     }
 }

@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MvcProject.Controllers
 {
-    [Authorize]
     public class AdminCategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -19,6 +18,7 @@ namespace MvcProject.Controllers
             _categoryService = categoryService;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             var categories = _categoryService.GetList();

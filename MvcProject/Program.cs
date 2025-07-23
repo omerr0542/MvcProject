@@ -34,10 +34,18 @@ builder.Services.AddScoped<IMessageService, MessageManager>();
 builder.Services.AddScoped<IImageFileService, ImageFileManager>();
 builder.Services.AddScoped<IAdminService, AdminManager>();
 
+
+
 builder.Services.AddAuthentication("AdminCookie")
     .AddCookie("AdminCookie", options =>
     {
         options.LoginPath = "/Login/Index";
+    });
+
+builder.Services.AddAuthentication("UserCookie")
+    .AddCookie("UserCookie", options =>
+    {
+        options.LoginPath = "/Login/WriterLogin";
     });
 
 //builder.Services.AddScoped<CategoryManager>();
@@ -47,7 +55,10 @@ builder.Services.AddAuthentication("AdminCookie")
 //builder.Services.AddScoped<Context>(); 
 
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add(new Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter());
+});
 
 var app = builder.Build();
 

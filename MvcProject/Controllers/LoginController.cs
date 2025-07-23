@@ -4,18 +4,23 @@ using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Security.Principal;
 
 namespace MvcProject.Controllers
 {
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly IAdminService _adminService;
+        private readonly IWriterService _writerService;
 
-        public LoginController(IAdminService adminService)
+        public LoginController(IAdminService adminService, IWriterService writerService)
         {
             _adminService = adminService;
+            _writerService = writerService;
         }
 
         [HttpGet]
@@ -44,6 +49,37 @@ namespace MvcProject.Controllers
                 );
 
                 return RedirectToAction("Index", "AdminCategory");
+            }
+            else
+            {
+                ViewBag.Error = "Kullanıcı adı veya şifre hatalı.";
+                return View();
+            }
+        }
+
+        [HttpGet]
+        public IActionResult WriterLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> WriterLogin(Writer w)
+        {
+            bool isAuthorized = _writerService.Authorization(w);
+
+            if (isAuthorized)
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimTypes.Name, w.WriterMail)
+                };
+
+                var claimsIdentity = new ClaimsIdentity(claims, "UserCookie");
+                var principal = new ClaimsPrincipal(claimsIdentity);
+                await HttpContext.SignInAsync(principal);
+
+                return RedirectToAction("MyContent", "WriterPanelContent");
             }
             else
             {
