@@ -1,9 +1,6 @@
 ﻿@using EntityLayer.Concrete;
 @model List<Content>
-@{
-    ViewData["Title"] = "MyContent";
-    Layout = "~/Views/Shared/_WriterLayout.cshtml";
-}
+
 
 <!DOCTYPE html>
 <html>
@@ -21,7 +18,7 @@
                             @foreach (var item in Model)
                             {
                                 <div class="time-label">
-                                    <span class="bg-success">@(((DateTime)item.ContentDate).ToString("dd-MM-yyyy"))</span>
+                                    <span class="bg-success">@(((DateTime)item.ContentDate).ToString("dd-MM-yyyy")) - @item.Writer.WriterName - @item.Writer.WriterSurname</span>
                                 </div>
                                 <!-- /.timeline-label -->
                                 <!-- timeline item -->
@@ -29,7 +26,7 @@
 
                                     <i class="fas fa-comment bg-yellow"></i>
                                     <div class="timeline-item">
-                                        <h3 class="timeline-header"><a href="#">@item.Writer.WriterName @item.Writer.WriterSurname</a> @item.Heading.HeadingName</h3>
+                                        <h3 class="timeline-header"><a href="#">@item.Writer.WriterName @item.Writer.WriterSurname</a> Deneme</h3>
                                         <div class="timeline-body">
                                             @item.ContentValue
                                         </div>
@@ -49,4 +46,3 @@
     <!-- ./wrapper -->
 </body>
 </html>
-

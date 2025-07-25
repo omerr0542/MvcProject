@@ -1,0 +1,22 @@
+﻿@model EntityLayer.Concrete.Content;
+@{
+    ViewData["Title"] = "AddContent";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<h1>Content Ekle</h1>
+<br />
+
+@using (Html.BeginForm("AddContent", "WriterPanelContent", FormMethod.Post))
+{
+    <div class="form-group">
+        <input type="hidden" name="HeadingID" value="@ViewBag.HeadingID" />
+        @Html.Label("Yazı Metni: ")
+        @Html.TextAreaFor(model => model.ContentValue, 4, 30, new { @class = "form-control", placeholder = "Yazı Metni" })
+        @Html.ValidationMessageFor(model => model.ContentValue)
+        <br />
+
+
+        <button class="btn btn-info">Kaydet</button>
+    </div>
+}

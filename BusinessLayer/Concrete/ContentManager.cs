@@ -29,6 +29,11 @@ namespace BusinessLayer.Concrete
             _contentDal.Delete(content);
         }
 
+        public List<Content> GetAllWithIncludes()
+        {
+            return _contentDal.ListWithIncludes(x => x.Heading, x => x.Writer);
+        }
+
         public Content GetByID(int ID)
         {
             return _contentDal.Get(x => x.ContentID == ID);
@@ -41,7 +46,7 @@ namespace BusinessLayer.Concrete
 
         public List<Content> GetListByHeadingID(int id)
         {
-            return _contentDal.FilterWithIncludes(x => x.HeadingID == id, x => x.Writer);
+            return _contentDal.FilterWithIncludes(x => x.HeadingID == id, x => x.Heading, x => x.Writer);
         }
 
         public List<Content> GetListByWriterID(int id)

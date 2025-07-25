@@ -16,5 +16,7 @@ namespace BusinessLayer.Abstract
         void UpdateContent(Content content);
         List<Content> GetListByHeadingID(int id);
         List<Content> GetListByWriterID(int id);
+        List<Content> GetAllWithIncludes(); // Include ile ilişkili verileri getirmek için
+
     }
 }

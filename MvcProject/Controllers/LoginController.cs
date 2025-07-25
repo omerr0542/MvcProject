@@ -87,5 +87,12 @@ namespace MvcProject.Controllers
                 return View();
             }
         }
+
+        public IActionResult Logout()
+        {
+            HttpContext.SignOutAsync("AdminCookie");
+            HttpContext.SignOutAsync("UserCookie");
+            return RedirectToAction("Headings", "Default");
+        }
     }
 }

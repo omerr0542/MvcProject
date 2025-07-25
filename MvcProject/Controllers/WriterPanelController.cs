@@ -4,6 +4,8 @@ using BusinessLayer.ValidationRules;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using PagedList;
+using PagedList.Mvc;
 
 namespace MvcProject.Controllers
 {
@@ -148,5 +150,13 @@ namespace MvcProject.Controllers
             _headingService.HeadingUpdate(heading);
             return RedirectToAction("Index");
         }
+
+        public IActionResult AllHeadings()
+        {
+            var heading = _headingService.GetAllWithIncludes().ToPagedList(1, 4);
+            return View(heading);
+        }
+
+
     }
 }
