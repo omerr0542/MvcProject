@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MvcProject.Models;
 
@@ -25,7 +26,6 @@ namespace MvcProject.Controllers
 
         public IActionResult Test()
         {
-
             return View();
         }
 
@@ -33,6 +33,12 @@ namespace MvcProject.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [AllowAnonymous]
+        public IActionResult HomePage()
+        {
+            return View();
         }
     }
 }

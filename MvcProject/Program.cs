@@ -33,7 +33,7 @@ builder.Services.AddScoped<IContactService, ContactManager>();
 builder.Services.AddScoped<IMessageService, MessageManager>();
 builder.Services.AddScoped<IImageFileService, ImageFileManager>();
 builder.Services.AddScoped<IAdminService, AdminManager>();
-
+builder.Services.AddScoped<IWriterLoginService, WriterLoginManager>();
 
 
 builder.Services.AddAuthentication("AdminCookie")

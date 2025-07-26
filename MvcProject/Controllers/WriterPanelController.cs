@@ -15,6 +15,8 @@ namespace MvcProject.Controllers
         HeadingValidator headingValidator = new HeadingValidator();
         private readonly ICategoryService _categoryService;
         private readonly IWriterService _writerService;
+        WriterValidator writerValidator = new WriterValidator();
+
 
         public WriterPanelController(IHeadingService headingService, ICategoryService categoryService, IWriterService writerService)
         {
@@ -23,9 +25,30 @@ namespace MvcProject.Controllers
             _writerService = writerService;
         }
 
+        [HttpGet]
         public IActionResult WriterProfile()
         {
-            return View();
+            string userMail = User.Identity.Name;
+            var writer = _writerService.GetList().FirstOrDefault(x => x.WriterMail == userMail);
+            return View(writer);
+        }
+
+        [HttpPost]
+        public IActionResult WriterProfile(Writer p)
+        {
+            var result = writerValidator.Validate(p);
+
+            if (!result.IsValid)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError(error.PropertyName, error.ErrorMessage);
+                }
+                return View(p); // Return the view with validation errors
+            }
+
+            _writerService.WriterUpdate(p);
+            return RedirectToAction("AllHeadings", "WriterPanel");
         }
 
         public IActionResult MyHeading(int id)

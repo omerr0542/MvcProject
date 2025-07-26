@@ -15,13 +15,17 @@ namespace MvcProject.Controllers
 
         public IActionResult Inbox()
         {
-            var messages = _messageService.GetListInbox();
+            string userMail = User.Identity.Name; // Login olan kullanıcının mail adresi
+
+            var messages = _messageService.GetListInbox(userMail);
             return View(messages);
         }
 
         public IActionResult Outbox()
         {
-            var messages = _messageService.GetListOutbox();
+            string userMail = User.Identity.Name; // Login olan kullanıcının mail adresi
+
+            var messages = _messageService.GetListOutbox(userMail);
             return View(messages);
         }
 
