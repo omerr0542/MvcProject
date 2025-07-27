@@ -24,8 +24,17 @@
 				<td>@item.AdminId</td>
 				<td>@item.AdminUserName</td>
 				<td>@item.AdminRole</td>
-				<td>Aktif</td>
-				<td><a href="/Authorization/EditAdmin/@item.AdminId" class="btn btn-warning">Pasif Yap</a> </td>
+				<td>@(item.AdminStatus ? "Aktif" : "Pasif")</td>
+				<td>
+					@if (item.AdminStatus)
+					{
+						<a href="/Authorization/ChangeStatus/@item.AdminId" class="btn btn-warning">Pasif Yap</a>
+					}
+					else
+					{
+						<a href="/Authorization/ChangeStatus/@item.AdminId" class="btn btn-success">Aktif Yap</a>
+					}
+				</td>
 				<td><a href="/Authorization/EditAdmin/@item.AdminId" class="btn btn-primary">Yetkisini Değiştir</a> </td>
 			</tr>
 		}

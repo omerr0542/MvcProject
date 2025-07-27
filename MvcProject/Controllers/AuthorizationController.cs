@@ -45,5 +45,14 @@ namespace MvcProject.Controllers
             _adminService.AdminUpdate(admin);
             return RedirectToAction("Index");
         }
+
+        public IActionResult ChangeStatus(int id)
+        {
+            var admin = _adminService.GetById(id);
+
+            admin.AdminStatus = !admin.AdminStatus; 
+              _adminService.AdminUpdate(admin);
+            return RedirectToAction("Index");
+        }
     }
 }
